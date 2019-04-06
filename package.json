@@ -1,0 +1,17 @@
+{
+  "name": "servertest",
+  "version": "1.0.0",
+  "description": "test server for graduation project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jaeyoon Park",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "http": "0.0.0",
+    "ip": "^1.1.5",
+    "mysql": "^2.16.0"
+  }
+}
