@@ -3,34 +3,56 @@ const express = require('express');
 const app = express();
 const mysql = require('mysql');
 const ip = require('ip');
+var cors = require('cors');
 
-const manageTag = require('./crudDB/manageTag.js');
-const managePhoto = require('./crudDB/managePhoto.js');
-const manageFolder = require('./crudDB/manageFolder.js');
+app.use(cors());
+
+// DB
+const postTag = require('./crudDB/postTag.js');
+
+const getPhoto = require('./crudDB/getPhoto.js');
+const postPhoto = require('./crudDB/postPhoto.js');
+
+const getFolder = require('./crudDB/getFolder.js');
+const postFolder = require('./crudDB/postFolder.js');
+
+const getTagfol = require('./crudDB/getTagfol.js');
+
 const searchTag = require('./crudDB/searchTag.js');
 
-const Myip = '127.0.0.1'
-//const Myip = ip.address();
-const port = 9000;
-
-http.createServer(app).listen(port, Myip, (error)=> {
-    if(error)console.log(error);
-    else console.log(`Server Open ${Myip}:${port}`);
-});
+// IMAGE PROCESSING
+const imgPro = require('./imageProcess/imgPro.js');
 
 
+//const Myip = '127.0.0.1'
+const Myip = ip.address();
+const port = 9010;
+
+app.listen(port, Myip, () => {
+    console.log(`Server Open ${Myip}:${port}`);
+})
 app.get('/', (req, res) => {
     res.end('hello Server');
 })
 
-app.get('/tags', manageTag);
-app.get('/photo', managePhoto);
-app.get('/folder', manageFolder);
+//DB 
+app.post('/ptag', postTag);
+
+app.get('/gphoto', getPhoto);
+app.post('/pphoto', postPhoto);
+
+app.get('/gfolder', getFolder);
+app.post('/pfolder', postFolder);
+
+app.get('/gtagfol', getTagfol);
+
 app.get('/search', searchTag);
 
+// IMAGE PROCESSING
+app.post('/imgPro', imgPro);    // 실제 태그 자동 생성
+//app.get('/testApi', testAPI);   // test용
 
-// app.get('/test', (req, res) => {
-//     res.setHeader("Access-Control-Allow-Origin", "*");
-//     data = JSON.stringify('hello');
-//     res.send(data);
-// })
+// 텍스트 공유
+// app.get('/imageText', imageText);
+//app.post('/shareText', shareText);
+
