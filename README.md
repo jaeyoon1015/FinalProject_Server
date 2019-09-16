@@ -1,4 +1,4 @@
 # FinalProject_Server
 
-#### Graduation_Project
-#### Server / Node.js
+* 졸업프로젝트 서버
+* Server / Node.js
